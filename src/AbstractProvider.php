@@ -11,6 +11,7 @@
 namespace Tholcomb\Goes;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
 use Doctrine\ORM\Tools\Setup;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -46,6 +47,7 @@ abstract class AbstractProvider implements ServiceProviderInterface
 				proxyDir: $c['db.proxy_dir'],
 				useSimpleAnnotationReader: false,
 			);
+			$config->setNamingStrategy(new UnderscoreNamingStrategy());
 
 			return EntityManager::create($conn, $config);
 		};
