@@ -1,0 +1,32 @@
+{
+    "name": "tholcomb/goes-php",
+    "description": "Web service for downloading and serving NOAA GOES imagery for live-ish background images",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tyler Holcomb",
+            "email": "tyler@tholcomb.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.0",
+        "ext-curl": "*",
+        "ext-imagick": "*",
+        "ext-sqlite3": "*",
+        "doctrine/orm": "^2.9",
+        "guzzlehttp/guzzle": "^7.3",
+        "symfony/process": "^5.3",
+        "tholcomb/symple-console": "^1.0",
+        "tholcomb/symple-http": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tholcomb\\Goes\\": "src/"
+        }
+    },
+    "scripts": {
+        "post-create-project-cmd": "@php bin/console.php goes:install @php"
+    }
+}
