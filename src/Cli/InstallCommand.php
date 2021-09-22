@@ -61,8 +61,15 @@ class InstallCommand extends AbstractCommand
 
 		// Create DB schema
 		$phpBin = $input->getArgument('php');
-		$schemaRes = (new Process([$phpBin, 'vendor/bin/doctrine', 'orm:schema-tool:create']))->run();
+		$output->writeln("PHP Binary '$phpBin'");
+		$process = new Process([$phpBin, 'vendor/bin/doctrine', 'orm:schema-tool:create']);
+		$schemaRes = $process->run();
 		if ($schemaRes !== 0) {
+			$output->writeln("Got code '$schemaRes'");
+			$output->writeln('Output:');
+			$output->write($process->getOutput());
+			$output->writeln('Error:');
+			$output->write($process->getErrorOutput());
 			throw new \Exception('Could not create schema');
 		}
 
