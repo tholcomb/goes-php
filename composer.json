@@ -27,6 +27,6 @@
         }
     },
     "scripts": {
-        "post-create-project-cmd": "@php bin/console.php goes:install @php"
+        "post-create-project-cmd": "@php bin/console.php goes:install"
     }
 }

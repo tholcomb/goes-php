@@ -32,11 +32,6 @@ class InstallCommand extends AbstractCommand
 		parent::__construct();
 	}
 
-	protected function configure(): void
-	{
-		$this->addArgument('php', InputArgument::REQUIRED, 'Path to PHP binary');
-	}
-
 	/** @throws */
 	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
@@ -60,16 +55,8 @@ class InstallCommand extends AbstractCommand
 		chmod($this->dbPath, 0664);
 
 		// Create DB schema
-		$phpBin = $input->getArgument('php');
-		$output->writeln("PHP Binary '$phpBin'");
-		$process = new Process([$phpBin, 'vendor/bin/doctrine', 'orm:schema-tool:create']);
-		$schemaRes = $process->run();
+		$schemaRes = (new Process([PHP_BINARY, 'vendor/bin/doctrine', 'orm:schema-tool:create']))->run();
 		if ($schemaRes !== 0) {
-			$output->writeln("Got code '$schemaRes'");
-			$output->writeln('Output:');
-			$output->write($process->getOutput());
-			$output->writeln('Error:');
-			$output->write($process->getErrorOutput());
 			throw new \Exception('Could not create schema');
 		}
 
