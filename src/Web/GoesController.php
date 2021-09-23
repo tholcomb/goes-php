@@ -58,4 +58,37 @@ class GoesController
 			'Content-Type' => 'image/jpeg',
 		], false);
 	}
+
+	#[Route(path: '/')]
+	public function getSplashPage(): Response
+	{
+		$html = <<<html
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>goes-php</title>
+	<style>
+		:root {
+			font-size: 24px;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+		}
+		main {
+			max-width: 1200px;
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+<main>
+	<h1>goes-php</h1>
+	<p>A web service for downloading and serving NOAA GOES imagery for live-ish background images.<br />More information available at <a href="https://github.com/tholcomb/goes-php">GitHub</a>.</p>
+</main>
+</body>
+</html>
+html;
+
+		return new Response($html);
+	}
 }
