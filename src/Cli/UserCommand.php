@@ -25,6 +25,10 @@ use Tholcomb\Symple\Console\Commands\AbstractCommand;
 class UserCommand extends AbstractCommand
 {
 	protected const NAME = 'goes:user';
+	private const SCREEN_SIZES = [
+		'1080p' => [1920, 1080],
+		'iPhone 12 Mini' => [1080, 2340],
+	];
 
 	public function __construct(
 		private UserService $user,
@@ -91,26 +95,18 @@ class UserCommand extends AbstractCommand
 		$timeData = $helper->ask($input, $output, $q);
 
 		// Collect screen size
-		// TODO: Move choices/sizes elsewhere
-		$q = new ChoiceQuestion('Select screen size', [
-			'1080p',
-			'iPhone 12 Mini',
-			'Other',
-		]);
+		$choices = array_keys(self::SCREEN_SIZES);
+		$choices[] = 'Other';
+		$q = new ChoiceQuestion('Select screen size', $choices);
 		$q->setAutocompleterCallback(null); // Prevent autocomplete
 		$size = $helper->ask($input, $output, $q);
-		switch ($size) {
-			case '1080p':
-				[$x, $y] = [1920, 1080];
-				break;
-			case 'iPhone 12 Mini':
-				[$x, $y] = [1080, 2340];
-				break;
-			default:
-				$q = new Question('X: ');
-				$x = (int)$helper->ask($input, $output, $q);
-				$q = new Question('Y: ');
-				$y = (int)$helper->ask($input, $output, $q);
+		if ($size === 'Other') {
+			$q = new Question('X: ');
+			$x = (int)$helper->ask($input, $output, $q);
+			$q = new Question('Y: ');
+			$y = (int)$helper->ask($input, $output, $q);
+		} else {
+			[$x, $y] = self::SCREEN_SIZES[$size];
 		}
 
 		// Create the user
