@@ -103,9 +103,9 @@ See [download_goes.php](examples/download_goes.php) for a working example.
 [iCloud link](https://www.icloud.com/shortcuts/0c7f939c8cb642a994e1fb4507d1f8fb)
 
 ## Limitations
-These limitations are due to the base image URL being hardcoded. (Sue me.) If you're running up against these, feel free to email me or submit a pull request.
+These limitations are due to the base image URL being hardcoded. ~~(Sue me.)~~ If you're running up against these, feel free to email me or submit a pull request.
 * Imagery is only available from the GOES-East satellite
-* Screen sizes with dimensions above 1808px may suffer image degradation
+* Screen sizes with dimensions greater than 1808px may suffer image degradation
 
 ## Acknowledgements
 This project would not have been possible without the fine work done by the folks at the National Atmospheric & Oceanic Administration (NOAA), and more specifically, the National Environmental Satellite, Data, and Information Service (NESDIS) and the Center for Satellite Applications and Research (STAR). 
