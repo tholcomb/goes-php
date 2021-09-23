@@ -60,6 +60,12 @@ class InstallCommand extends AbstractCommand
 			throw new \Exception('Could not create schema');
 		}
 
+		// Generate proxy classes
+		$proxyRes = (new Process([PHP_BINARY, 'vendor/bin/doctrine', 'orm:generate-proxies']))->run();
+		if ($proxyRes !== 0) {
+			throw new \Exception('Could not generate proxy classes');
+		}
+
 		// Notify
 		$msg = 'Installation complete! Don\'t forget to setup CRON and add users!';
 		$block = $this->getHelper('formatter')->formatBlock($msg, 'fg=black;bg=green', true);
