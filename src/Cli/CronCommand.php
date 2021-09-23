@@ -160,7 +160,7 @@ dql;
 	{
 		$dql = <<<dql
 SELECT r FROM Tholcomb\Goes\Model\Raw r
-WHERE r.tries <= :maxTries
+WHERE r.tries <= :maxTries AND r.path IS NULL
 dql;
 
 		return $this->em->createQuery($dql)
