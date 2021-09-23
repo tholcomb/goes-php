@@ -11,6 +11,7 @@
 namespace Tholcomb\Goes;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NoResultException;
 use Tholcomb\Goes\Model\Image;
 use Tholcomb\Goes\Model\User;
 
@@ -86,7 +87,7 @@ dql;
 				'x' => $user->getScreenX(),
 				'y' => $user->getScreenY(),
 			])->getSingleResult();
-		} catch (\Exception $e) {
+		} catch (NoResultException $e) {
 			return null;
 		}
 		if ($image === $user->getLastImage()) {
