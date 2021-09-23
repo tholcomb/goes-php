@@ -42,7 +42,7 @@ class GoesController
 
 		// Find user. Return 403 if unable to locate.
 		try {
-			$user = $this->user->getUser(strtolower($apiKey));
+			$user = $this->user->getUser($apiKey);
 		} catch (UserException $e) {
 			$this->log->warning(sprintf('Could not find user for Api-Key "%s"', $e->getApiKey()));
 			throw new AccessDeniedHttpException();
